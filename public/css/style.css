@@ -1,15 +1,17 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background: #f1f1f1;
+body {
+    background-color: #E4E9FD;
+    background-image: -webkit-linear-gradient(65deg, #180e29 40%, #a9bafc 0%);
+    min-height: 1000px;
 }
 
-#heading{
+#heading {
     font-size: 2.5rem;
     width: max-content;
     font-weight: 600;
@@ -17,7 +19,8 @@ body{
     margin: 1.5rem auto;
 }
 
-.list li{
+.item {
+    display: flex;
     list-style: none;
     width: 100%;
     max-width: 600px;
@@ -26,10 +29,20 @@ body{
     background: #fff;
     padding: 1rem;
     border-radius: 5px;
-    box-shadow: 0.5rem 0.5rem 10px 2px rgba(0,0,0,0.1);
+    box-shadow: 0.5rem 0.5rem 10px 2px rgba(0, 0, 0, 0.1);
 }
 
-.form{
+input[type="checkbox"] {
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+input:checked+p {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.form {
     display: flex;
     width: 100%;
     max-width: 600px;
@@ -37,13 +50,15 @@ body{
     margin: 2rem auto;
 }
 
-.form input{
+.form input {
     width: 100%;
     max-width: 500px;
     padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
 }
 
-.form button{
+.form button {
     width: 100%;
     max-width: 80px;
     background: #333;
@@ -54,25 +69,26 @@ body{
     cursor: pointer;
 }
 
-.form button:hover{
+.form button:hover {
     background: #555;
 }
 
-.form input:focus{
+.form input:focus {
     outline: none;
 }
 
-.form input::placeholder{
+.form input::placeholder {
     color: #333;
 }
 
 
-@media screen and (max-width: 600px){
-    .form{
+@media screen and (max-width: 600px) {
+    .form {
         flex-direction: column;
         align-items: center;
     }
-    .form input{
+
+    .form input {
         margin-bottom: 1rem;
     }
 }

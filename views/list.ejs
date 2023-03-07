@@ -9,11 +9,14 @@
 </head>
 <body>
     <h1 id="heading"> <%= kindOfDay %> </h1>
-    <ul class="list">
+    <div class="">
         <% for(let i=0;i<newListItem.length;i++){ %>
-            <li> <%= newListItem[i] %> </li>
+            <div class="item">
+                <input type="checkbox">
+                <p> <%= newListItem[i] %> </p>
+            </div>
         <% } %>
-    </ul>
+    </div>
     <form class="form" action="/" method="post">
         <input type="text" name="newItem" placeholder="Enter new Task">
         <button type="submit">Add</button>
