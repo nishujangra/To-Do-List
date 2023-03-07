@@ -82,6 +82,18 @@ input:checked+p {
 }
 
 
+.footer{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #777;
+    text-align: center;
+    padding: 1rem;
+}
+
 @media screen and (max-width: 600px) {
     .form {
         flex-direction: column;
