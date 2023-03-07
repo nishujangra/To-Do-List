@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const date = require(__dirname + '/date.js')
 
 
 const app = express()
@@ -18,16 +19,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set('view engine', 'ejs');
 
 
-var items = [];
-var workItems = [];
+const items = [];
+const workItems = [];
 
 
 // Routing for home page
 app.get('/', (req, res) => {
-    let today = new Date();
-    let options = { weekday: 'long', day: 'numeric', month: 'long' }
-    let day = today.toLocaleString('en-US', options);
-
+    let day = date.getDate();
     res.render('list', {
         listTitle: day,
         newListItem: items
