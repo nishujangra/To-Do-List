@@ -8,13 +8,14 @@
             <div class="item">
                 <input type="checkbox" onchange="this.form.submit()" name="checkbox" value="<%= item._id %>">
                 <p> <%= item.name %> </p>
+                <input type="hidden" name="listName" value= "<%= listTitle %>">
             </div>
         </form>
             <% }) %>
     </div>
-    <form class="form" action="" method="post">
+    <form class="form" action="/" method="post">
         <input type="text" name="newItem" placeholder="Enter new Task">
-        <button type="submit" name="button" value= <%= listTitle %> >Add</button>
+        <button type="submit" name="list" value= "<%= listTitle %>" >Add</button>
     </form>
 
 <%- include('footer') -%>

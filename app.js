@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://nishujangra27:4cdd0509fxnx@todo.awuyguz.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect("Url of your database")
 
 
 const app = express()
@@ -39,24 +39,76 @@ app.get('/', (req, res) => {
 
 
 app.post('/', (req, res) => {
+    const listName = req.body.list;
+
     const item = new items({
         name: req.body.newItem
     })
-    if (item.name == "") {
-        console.log("Empty item");
+    if(listName === "Today"){
+        if (item.name == "") {
+            console.log("Empty item");
+        }
+        else item.save();
+        res.redirect('/');
     }
-    else item.save();
-    res.redirect('/');
+    else{
+        List.findOne({name: listName}).then((foundList) => {
+            foundList.items.push(item);
+            foundList.save();
+            res.redirect('/' + listName);
+        })
+    }
+})
+
+
+const listSchema = {
+    name: String,
+    items: [itemsSchema]
+}
+
+const List = mongoose.model('List', listSchema);
+
+
+
+app.get('/:customListName', (req, res) => {
+    const customListName = req.params.customListName;
+    List.findOne({ name: customListName }).then(function (foundList) {
+        if (!foundList) {
+            //Create a new list
+            const list = new List({
+                name: customListName,
+                items: []
+            });
+            list.save();
+            res.redirect("/" + customListName);
+        } else {
+            //Show an existing list
+
+            res.render("list", { listTitle: foundList.name, newListItem: foundList.items });
+        }
+
+    })
 })
 
 
 app.post('/delete', (req, res) => {
+    const listName = req.body.listName;
     const checkedItemId = req.body.checkbox;
-    items.findByIdAndRemove(checkedItemId).then((err) => {
-        if (err) console.log(err);
-        else console.log("Deleted");
-    })
-    res.redirect('/');
+
+    if(listName === "Today"){
+        items.findByIdAndRemove(checkedItemId).then((err) => {
+            if (err) console.log(err);
+            else console.log("Deleted");
+        })
+        res.redirect('/');
+    }
+    else{
+        List.findOne({name: listName}).then((foundList) => {
+            foundList.items.pull(checkedItemId);
+            foundList.save();
+        })
+        res.redirect('/' + listName);
+    }
 })
 
 
