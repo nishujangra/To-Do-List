@@ -1,8 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const _ = require('lodash')
 const mongoose = require('mongoose')
 
-mongoose.connect("Url of your database")
+mongoose.connect('mongodb+srv://nishujangra27:4cdd0509fxnx@todo.awuyguz.mongodb.net/?retryWrites=true&w=majority')
 
 
 const app = express()
@@ -71,7 +72,7 @@ const List = mongoose.model('List', listSchema);
 
 
 app.get('/:customListName', (req, res) => {
-    const customListName = req.params.customListName;
+    const customListName = _.capitalize(req.params.customListName);
     List.findOne({ name: customListName }).then(function (foundList) {
         if (!foundList) {
             //Create a new list
