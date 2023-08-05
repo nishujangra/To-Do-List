@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const _ = require('lodash')
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb+srv://nishujangra27:4cdd0509fxnx@todo.awuyguz.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('URL')
 
 
 const app = express()
